@@ -11,13 +11,13 @@ class CreateTables < ActiveRecord::Migration
       ## :password_expirable
       t.datetime :password_changed_at
 
-      t.timestamps
+      t.timestamps null: false
     end
+
     add_index :users, :password_changed_at
 
     create_table :old_passwords do |t|
       t.string :encrypted_password
-      t.string :password_salt
 
       t.references :password_archivable, polymorphic: true
     end

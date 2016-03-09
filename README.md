@@ -2,7 +2,7 @@
 
 An enterprise security extension for [Devise](https://github.com/plataformatec/devise), trying to meet industrial standard security demands for web applications.
 
-It is composed of 7 addtional Devise modules:
+It is composed of 7 additional Devise modules:
 
 * `:password_expirable` - passwords will expire after a configured time (and will need an update)
 * `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
@@ -10,7 +10,7 @@ It is composed of 7 addtional Devise modules:
 * `:session_limitable` - ensures, that there is only one session usable per account at once
 * `:expirable` - expires a user account after x days of inactivity (default 90 days)
 * `:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
-* `:paranoid_verification` - admin can generate verification code that user needs to fill in othervise he wont be able to use the application.
+* `:paranoid_verification` - admin can generate verification code that user needs to fill in otherwise he wont be able to use the application.
 
 Configuration and database schema for each module below.
 
@@ -34,7 +34,7 @@ After you installed Devise Security Extension you need to run the generator:
 rails generate devise_security_extension:install
 ```
 
-The generator will create `config/initializers/devise_security_extension.rb`. Enable
+The generator adds optional configurations to `config/initializers/devise.rb`. Enable
 the modules you wish to use in the initializer you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
 
 ```ruby
@@ -60,7 +60,7 @@ Devise.setup do |config|
   # Need 1 char of A-Z, a-z and 0-9
   # config.password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
 
-  # How often save old passwords in archive
+  # Number of old passwords in archive
   # config.password_archiving_count = 5
 
   # Deny old password (true, false, count)
@@ -132,7 +132,6 @@ add_index :the_resources, :password_changed_at
 ```ruby
 create_table :old_passwords do |t|
   t.string :encrypted_password, :null => false
-  t.string :password_salt
   t.string :password_archivable_type, :null => false
   t.integer :password_archivable_id, :null => false
   t.datetime :created_at

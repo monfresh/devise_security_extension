@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'devise_security_extension'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -18,5 +19,6 @@ module RailsApp
     config.assets.enabled = true
 
     config.assets.version = '1.0'
+    config.secret_key_base = 'fuuuuuuuuuuu'
   end
 end
